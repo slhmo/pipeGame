@@ -1,0 +1,141 @@
+package application.project;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.util.Random;
+
+
+public class PlayLevelOne extends Application {
+    AnchorPane anchorPane;
+    ImageView cloud;
+    int[][] solution;
+    BaseBlock[][] map;
+    Timeline timeline;
+
+    public PlayLevelOne(int [][] solution) {
+        this.solution = solution;
+    }
+
+    private void placeStraightPipe(BaseBlock [][] map, int i, int j) {
+        StraightPipes straightPipe = new StraightPipes("StraightPipe.png");
+        map[i][j] = straightPipe;
+        ImageView straightPipeImageView = straightPipe.imageView;
+        anchorPane.getChildren().add(straightPipeImageView);
+        straightPipeImageView.setY(450+100*i);
+        straightPipeImageView.setX(710+100*j);
+        straightPipeImageView.setFitHeight(100);
+        straightPipeImageView.setFitWidth(100);
+    }
+
+    private void placeElbowBendingPipe(BaseBlock [][] map, int i, int j) {
+        ElbowBendingPipes elbowBendingPipe = new ElbowBendingPipes("ElbowBendingPipe.png");
+        map[i][j] = elbowBendingPipe;
+        ImageView elbowBendingPipeImageView = elbowBendingPipe.imageView;
+        anchorPane.getChildren().add(elbowBendingPipeImageView);
+        elbowBendingPipeImageView.setY(450+100*i);
+        elbowBendingPipeImageView.setX(710+100*j);
+        elbowBendingPipeImageView.setFitHeight(100);
+        elbowBendingPipeImageView.setFitWidth(100);
+    }
+
+    private void generateMap(){
+        BaseBlock[][] map = new BaseBlock[solution.length][solution[0].length];
+        this.map = map;
+        for(int i = 0; i<solution.length; i++) {
+            for (int j = 0; j<solution[0].length; j++) {
+                if (solution[i][j] == 0) {
+
+                    int random = new Random().nextInt(10);
+                    if (random<8) {map[i][j] = new EmptyBlock();}
+                    else if (random == 9) {
+                        placeStraightPipe(map, i, j);
+                    }
+                    else {
+                        placeElbowBendingPipe(map, i, j);
+                    }
+                }
+                else if (solution[i][j] == 1 || solution[i][j] == 2){
+                    placeStraightPipe(map, i, j);
+                }
+                else if(solution[i][j] == 3 || solution[i][j]==4 || solution[i][j]==5 || solution[i][j]==6) {
+                    placeElbowBendingPipe(map, i, j);
+                }
+                else if(solution[i][j] == 7) {
+                    map[i][j] = new InputPipe();
+                }
+                else if (solution[i][j] == 8) {
+                    map[i][j] = new OutputPipe();
+                }
+            }
+        }
+    }
+
+    public boolean validateMap() {
+        for (int i=0; i<map.length; i++) {
+            for (int j = 0; j < map[0].length; j++) {
+                if (map[i][j].getState() != solution[i][j] && solution[i][j] != 0) {return false;}
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        //create root scene
+        this.anchorPane = new AnchorPane();
+
+        // creating child nodes
+        Image background = new Image("background.jpg");
+        ImageView backgroundView = new ImageView(background);
+        backgroundView.setFitWidth(1920);
+        backgroundView.setFitHeight(1080);
+        this.cloud = new ImageView("sql.png");
+        cloud.setFitWidth(160);
+        cloud.setFitHeight(90);
+        cloud.setX(-160);
+
+
+        // add nodes
+        anchorPane.getChildren().add(backgroundView);
+        anchorPane.getChildren().add(cloud);
+
+//        this.solution = new int[][]{{7, 0, 0, 0, 0}, {3, 2, 2, 5, 0}, {4, 2, 2, 6, 0}, {1, 0, 0, 0, 0}, {1, 0, 0, 0, 0}, {3, 2, 2, 2, 8}};
+        generateMap();
+
+        Scene scene = new Scene(anchorPane, 800, 600);
+        stage.setFullScreen(true);
+        stage.setFullScreenExitHint("press esc to exit fullscreen");
+        stage.setScene(scene);
+        stage.show();
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(200), e -> run()));
+        this.timeline = timeline;
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+    }
+    private void run() {
+//        System.out.println("ran");
+        if (cloud.getX() == 1920) {
+            cloud.setX(-160);}
+        cloud.setX(cloud.getX()+5);
+//        printMap();
+        if (validateMap()) {
+            System.out.println("fibished");
+            timeline.stop();
+            //ToDo
+        }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+}
