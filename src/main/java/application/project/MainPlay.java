@@ -34,6 +34,8 @@ public class MainPlay extends Application {
     BaseBlock[][] levelThreeMap;
 
 
+    int counter;
+
     @Override
     public void start(Stage stage) {
         this.stage = stage;
@@ -48,10 +50,10 @@ public class MainPlay extends Application {
             backgroundView.setFitWidth(1920);
             backgroundView.setFitHeight(1080);
             anchorPane.getChildren().add(backgroundView);
-            this.cloud = new ImageView("sql.png");
-            cloud.setFitWidth(160);
-            cloud.setFitHeight(90);
-            cloud.setX(-160);
+            this.cloud = new ImageView("cloud.png");
+            cloud.setFitWidth(380);
+            cloud.setFitHeight(150);
+            cloud.setX(-380);
             anchorPane.getChildren().add(cloud);
             stage.setFullScreen(true);
             stage.setFullScreenExitHint("press esc to exit fullscreen");
@@ -102,7 +104,7 @@ public class MainPlay extends Application {
     private void run() {
         // cloud animation
         if (cloud.getX() == 1920) {
-            cloud.setX(-160);}
+            cloud.setX(-380);}
         cloud.setX(cloud.getX()+5);
 
         if (state == 0) {
@@ -112,41 +114,47 @@ public class MainPlay extends Application {
             }
         }
 
-
         if (state == 1) {
             // play level one
             if (playLevelOne.validated){
                 state = 0;
-                System.out.println("ok");
+                MainMenu.setResultWon();
                 MovingPipes.setNumberOfClicks(0);
                 start(stage);
             }
         }
+
         if (state == 2) {
             // play level two
             if (MovingPipes.getNumberOfClicks() > playLevelTwo.maxMoves) {
                 state = 0;
                 MovingPipes.setNumberOfClicks(0);
+                MainMenu.setResultLost();
                 start(stage);
             }
             if (playLevelTwo.validated){
                 state = 0;
-                System.out.println("ok");
                 MovingPipes.setNumberOfClicks(0);
+                MainMenu.setResultWon();
                 start(stage);
             }
         }
 
         if (state == 3) {
             // play level two
-            if (MovingPipes.getNumberOfClicks() > playLevelThree.maxMoves) {
+            counter++;
+            playLevelThree.setTimerText(String.format("time: %.2f", 30-counter*0.2));
+            if (MovingPipes.getNumberOfClicks() > playLevelThree.maxMoves || 30-counter*0.2 < 0) {
                 state = 0;
+                counter = 0;
+                MainMenu.setResultLost();
                 MovingPipes.setNumberOfClicks(0);
                 start(stage);
             }
             if (playLevelThree.validated){
                 state = 0;
-                System.out.println("finished");
+                counter = 0;
+                MainMenu.setResultWon();
                 MovingPipes.setNumberOfClicks(0);
                 start(stage);
             }

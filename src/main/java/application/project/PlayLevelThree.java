@@ -7,11 +7,13 @@ import javafx.scene.layout.AnchorPane;
 public class PlayLevelThree extends PlayLevelTwo{
     private Label undoButton;
     private int numberOfUndo;
-    private int numberOfAutoFill = 0;
+    private int numberOfAutoFill;
+    private Label timer;
 
     public PlayLevelThree(AnchorPane anchorPane, int[][] solution, int maxMoves) {
         super(anchorPane, solution, maxMoves);
         autoFill();
+        generateTimerLabel();
         this.undoButton = generateUndoButton();
     }
 
@@ -54,4 +56,18 @@ public class PlayLevelThree extends PlayLevelTwo{
         });
         anchorPane.getChildren().add(autoFillLabel);
     }
+
+
+    private void generateTimerLabel() {
+        this.timer = new Label();
+        timer.setLayoutX(1800);
+        timer.setLayoutY(150);
+        timer.setStyle("-fx-background-color: red; -fx-font-size: 14px; -fx-text-fill: black;");
+        anchorPane.getChildren().add(timer);
+    }
+
+    public void setTimerText(String text) {
+        timer.setText(text);
+    }
+
 }
