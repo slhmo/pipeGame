@@ -14,6 +14,9 @@ public class PlayLevelOne {
     BaseBlock[][] map;
     public boolean validated;
     int maxMoves;
+    private static final double startX = 710;
+    private static final double startY = 50;
+    private static final double cellSize = 100;
 
     public PlayLevelOne(AnchorPane anchorPane, int [][] solution, int maxMoves) {
         this.anchorPane = anchorPane;
@@ -27,10 +30,10 @@ public class PlayLevelOne {
         map[i][j] = inputPipe;
         ImageView inputPipeImageView = inputPipe.getImageView();
         anchorPane.getChildren().add(inputPipeImageView);
-        inputPipeImageView.setY(50+100*i);
-        inputPipeImageView.setX(710+100*j);
-        inputPipeImageView.setFitHeight(100);
-        inputPipeImageView.setFitWidth(100);
+        inputPipeImageView.setY(startY+cellSize*i);
+        inputPipeImageView.setX(startX+cellSize*j);
+        inputPipeImageView.setFitHeight(cellSize);
+        inputPipeImageView.setFitWidth(cellSize);
     }
 
     private void placeOutputPipe(BaseBlock [][] map, int i, int j) {
@@ -38,10 +41,10 @@ public class PlayLevelOne {
         map[i][j] = outputPipe;
         ImageView outputPipeImageView = outputPipe.getImageView();
         anchorPane.getChildren().add(outputPipeImageView);
-        outputPipeImageView.setY(50+100*i);
-        outputPipeImageView.setX(710+100*j);
-        outputPipeImageView.setFitHeight(100);
-        outputPipeImageView.setFitWidth(100);
+        outputPipeImageView.setY(startY+cellSize*i);
+        outputPipeImageView.setX(startX+cellSize*j);
+        outputPipeImageView.setFitHeight(cellSize);
+        outputPipeImageView.setFitWidth(cellSize);
     }
 
     private void placeStraightPipe(BaseBlock [][] map, int i, int j) {
@@ -49,10 +52,10 @@ public class PlayLevelOne {
         map[i][j] = straightPipe;
         ImageView straightPipeImageView = straightPipe.getImageView();
         anchorPane.getChildren().add(straightPipeImageView);
-        straightPipeImageView.setY(50+100*i);
-        straightPipeImageView.setX(710+100*j);
-        straightPipeImageView.setFitHeight(100);
-        straightPipeImageView.setFitWidth(100);
+        straightPipeImageView.setY(startY+cellSize*i);
+        straightPipeImageView.setX(startX+cellSize*j);
+        straightPipeImageView.setFitHeight(cellSize);
+        straightPipeImageView.setFitWidth(cellSize);
     }
 
     private void placeElbowBendingPipe(BaseBlock [][] map, int i, int j) {
@@ -60,10 +63,10 @@ public class PlayLevelOne {
         map[i][j] = elbowBendingPipe;
         ImageView elbowBendingPipeImageView = elbowBendingPipe.getImageView();
         anchorPane.getChildren().add(elbowBendingPipeImageView);
-        elbowBendingPipeImageView.setY(50+100*i);
-        elbowBendingPipeImageView.setX(710+100*j);
-        elbowBendingPipeImageView.setFitHeight(100);
-        elbowBendingPipeImageView.setFitWidth(100);
+        elbowBendingPipeImageView.setY(startY+cellSize*i);
+        elbowBendingPipeImageView.setX(startX+cellSize*j);
+        elbowBendingPipeImageView.setFitHeight(cellSize);
+        elbowBendingPipeImageView.setFitWidth(cellSize);
     }
 
     protected void placeInteractiveCrossingPipe(BaseBlock [][] map, int i, int j){System.out.println("level one does not accept crossing pipes"+i+" "+ j);}
@@ -136,18 +139,18 @@ public class PlayLevelOne {
     protected void generateGrid() {
         // generate grid in between cells
         for (int i=1; i<map.length; i++) {
-            Line line = new Line(710+i*100, 50, 710+i*100, 50+map[0].length*100);
+            Line line = new Line(startX+i*cellSize, startY, startX+i*cellSize, startY+map[0].length*cellSize);
             line.setStrokeWidth(1);
             anchorPane.getChildren().add(line);
         }
         for (int j=1; j< map[0].length; j++) {
-            Line line = new Line(710, 50+j*100, 710+map.length*100, 50+j*100);
+            Line line = new Line(startX, startY+j*cellSize, startX+map.length*cellSize, startY+j*cellSize);
             line.setStrokeWidth(1);
             anchorPane.getChildren().add(line);
         }
 
         // generate border for outside the cells
-        Rectangle rectangle = new Rectangle(710, 50, map.length*100, map[0].length*100);
+        Rectangle rectangle = new Rectangle(startX, startY, map.length*cellSize, map[0].length*cellSize);
         rectangle.setStrokeWidth(3);
         rectangle.setFill(null);
         rectangle.setStroke(Color.BLACK);

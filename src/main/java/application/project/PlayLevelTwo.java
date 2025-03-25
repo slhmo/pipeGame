@@ -6,6 +6,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class PlayLevelTwo extends PlayLevelOne{
     Label maxMovesLabel;
+//    protected BaseBlock[][] previousMap;
 
     public PlayLevelTwo(AnchorPane anchorPane, int[][] solution, int maxMoves) {
         super(anchorPane, solution, maxMoves);
@@ -65,6 +66,7 @@ public class PlayLevelTwo extends PlayLevelOne{
         generateMap();
         generateGrid();
         anchorPane.setOnMouseClicked(event -> {
+//            previousMap = map.clone();
             validateMap();
             updateMoveCounter(maxMoves);
         });

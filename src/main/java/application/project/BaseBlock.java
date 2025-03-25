@@ -1,9 +1,10 @@
 package application.project;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 
 public abstract class BaseBlock {
-    private static final int state = -1;
+    private static int state = -1;
     protected final ImageView imageView;
 
     public BaseBlock() {
@@ -18,4 +19,9 @@ public abstract class BaseBlock {
         return imageView;
     }
 
+    public void setState(int i) {
+        state = i;
+    }
+
+    public void setImageViewRotate() {}
 }

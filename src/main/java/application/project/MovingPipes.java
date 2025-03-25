@@ -11,6 +11,8 @@ public abstract class MovingPipes extends BaseBlock {
     protected final int[] possibleStates;
     private int state;
     protected static int numberOfClicks;
+    private MouseButton latestMouseButton;
+    private static MovingPipes usedPipe;
 
     public MovingPipes(String path) {
         imageView = new ImageView(path);
@@ -22,7 +24,10 @@ public abstract class MovingPipes extends BaseBlock {
     public void setImageViewProperties() {
         imageView.setOnMouseClicked(event -> {
             numberOfClicks += 1;
-//            System.out.println(this.state);
+            latestMouseButton = event.getButton();
+            usedPipe = this;
+
+            System.out.println(this.state);
             if (event.getButton() == MouseButton.PRIMARY) {
                 imageView.setRotate(imageView.getRotate()+90);
                 state = MovingPipesStates.setState(state, MouseButton.PRIMARY);
@@ -45,22 +50,46 @@ public abstract class MovingPipes extends BaseBlock {
         return states[random];
     }
 
+    public static void undo() {
+        if (usedPipe.latestMouseButton == MouseButton.PRIMARY) {
+            usedPipe.imageView.setRotate(usedPipe.imageView.getRotate()-90);
+            usedPipe.state = MovingPipesStates.setState(usedPipe.state, MouseButton.SECONDARY);
+        }
+        else if (usedPipe.latestMouseButton == MouseButton.SECONDARY) {
+            usedPipe.imageView.setRotate(usedPipe.imageView.getRotate()+90);
+            usedPipe.state = MovingPipesStates.setState(usedPipe.state, MouseButton.PRIMARY);
+        }
+    }
+
+
     public int getState() {
         return state;
     }
 
     @Override
-    public ImageView getImageView() {
-        return imageView;
-    }
-    protected int[] setPossibleStates() {
-        return new int[]{1, 2, 3, 4, 5, 6, 9};
+    public void setState(int state) {
+        this.state = state;
     }
 
-    public static int getNumberOfClicks() {
-        return numberOfClicks;
-    }
     public static void setNumberOfClicks(int num) {
         numberOfClicks = num;
     }
+    @Override
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    protected int[] setPossibleStates() {
+        return new int[]{1, 2, 3, 4, 5, 6, 9};
+    }
+    public static int getNumberOfClicks() {
+        return numberOfClicks;
+    }
+
+    @Override
+    public void setImageViewRotate() {
+        imageView.setRotate(imageView.getRotate()+90);
+        state = MovingPipesStates.setState(state, MouseButton.PRIMARY);
+    }
+
 }
