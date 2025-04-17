@@ -14,7 +14,7 @@ public class PlayLevelTwo extends PlayLevelOne{
     }
     @Override
     protected void placeInteractiveCrossingPipe(BaseBlock [][] map, int i, int j) {
-        CrossingPipes crossingPipe = new CrossingPipes("CrossingPipe.png");
+        InteractiveCrossingPipe crossingPipe = new InteractiveCrossingPipe("CrossingPipe.png");
         map[i][j] = crossingPipe;
         ImageView crossingPipeImageView = crossingPipe.getImageView();
         anchorPane.getChildren().add(crossingPipeImageView);
@@ -74,7 +74,7 @@ public class PlayLevelTwo extends PlayLevelOne{
 
     public Label generateMoveCounter(int maxMoves) {
         this.maxMovesLabel = new Label();
-        maxMovesLabel.setText(String.format("moves left: %d", maxMoves-MovingPipes.getNumberOfClicks()));
+        maxMovesLabel.setText(String.format("moves left: %d", maxMoves- InteractivePipe.getNumberOfClicks()));
         maxMovesLabel.setLayoutX(100);
         maxMovesLabel.setLayoutY(100);
         anchorPane.getChildren().add(maxMovesLabel);
@@ -83,8 +83,8 @@ public class PlayLevelTwo extends PlayLevelOne{
 
     public void updateMoveCounter(int maxMoves) {
         System.out.println("max: "+maxMoves);
-        System.out.println("moves: "+MovingPipes.getNumberOfClicks());
-        maxMovesLabel.setText(String.format("moves left: %d", maxMoves-MovingPipes.getNumberOfClicks()));
+        System.out.println("moves: "+ InteractivePipe.getNumberOfClicks());
+        maxMovesLabel.setText(String.format("moves left: %d", maxMoves- InteractivePipe.getNumberOfClicks()));
     }
 
 }

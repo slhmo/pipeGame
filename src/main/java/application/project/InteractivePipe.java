@@ -4,7 +4,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import java.util.Random;
 
-public abstract class MovingPipes extends BaseBlock {
+public abstract class InteractivePipe extends BaseBlock {
     // has a possibleStates field which the state will be chosen from there.
     // has an imageView and sets some properties for it.(Mouse click and enter...)
     protected ImageView imageView;
@@ -12,9 +12,9 @@ public abstract class MovingPipes extends BaseBlock {
     private int state;
     protected static int numberOfClicks;
     private MouseButton latestMouseButton;
-    private static MovingPipes usedPipe;
+    private static InteractivePipe usedPipe;
 
-    public MovingPipes(String path) {
+    public InteractivePipe(String path) {
         imageView = new ImageView(path);
         possibleStates = setPossibleStates();
         state = setInitialState(possibleStates);

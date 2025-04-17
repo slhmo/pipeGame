@@ -24,8 +24,8 @@ public class PlayLevelThree extends PlayLevelTwo{
         undoButton.setStyle("-fx-background-color: blue; -fx-font-size: 24px; -fx-text-fill: black;");
         undoButton.setOnMouseClicked(event -> {
             if (numberOfUndo>1 ){return;}
-            MovingPipes.numberOfClicks -= 1;
-            MovingPipes.undo();
+            InteractivePipe.numberOfClicks -= 1;
+            InteractivePipe.undo();
             numberOfUndo++;
         });
         anchorPane.getChildren().add(undoButton);

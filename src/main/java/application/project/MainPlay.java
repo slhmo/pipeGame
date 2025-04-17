@@ -134,22 +134,22 @@ public class MainPlay extends Application {
             if (playLevelOne.validated){
                 state = 0;
                 MainMenu.setResultWon();
-                MovingPipes.setNumberOfClicks(0);
+                InteractivePipe.setNumberOfClicks(0);
                 start(stage);
             }
         }
 
         if (state == 2) {
             // play level two
-            if (MovingPipes.getNumberOfClicks() > playLevelTwo.maxMoves) {
+            if (InteractivePipe.getNumberOfClicks() > playLevelTwo.maxMoves) {
                 state = 0;
-                MovingPipes.setNumberOfClicks(0);
+                InteractivePipe.setNumberOfClicks(0);
                 MainMenu.setResultLost();
                 start(stage);
             }
             if (playLevelTwo.validated){
                 state = 0;
-                MovingPipes.setNumberOfClicks(0);
+                InteractivePipe.setNumberOfClicks(0);
                 MainMenu.setResultWon();
                 start(stage);
             }
@@ -159,18 +159,18 @@ public class MainPlay extends Application {
             // play level three
             counter++;
             playLevelThree.setTimerText(String.format("time: %.2f", 30-counter*0.2));
-            if (MovingPipes.getNumberOfClicks() > playLevelThree.maxMoves || 30-counter*0.2 < 0) {
+            if (InteractivePipe.getNumberOfClicks() > playLevelThree.maxMoves || 30-counter*0.2 < 0) {
                 state = 0;
                 counter = 0;
                 MainMenu.setResultLost();
-                MovingPipes.setNumberOfClicks(0);
+                InteractivePipe.setNumberOfClicks(0);
                 start(stage);
             }
             if (playLevelThree.validated){
                 state = 0;
                 counter = 0;
                 MainMenu.setResultWon();
-                MovingPipes.setNumberOfClicks(0);
+                InteractivePipe.setNumberOfClicks(0);
                 start(stage);
             }
         }

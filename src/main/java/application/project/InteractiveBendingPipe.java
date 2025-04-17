@@ -2,8 +2,8 @@ package application.project;
 
 import java.util.Random;
 
-public class ElbowBendingPipes extends MovingPipes{
-    public ElbowBendingPipes(String path) {
+public class InteractiveBendingPipe extends InteractivePipe {
+    public InteractiveBendingPipe(String path) {
         super(path);
     }
 

@@ -47,8 +47,8 @@ public class PlayLevelOne {
         outputPipeImageView.setFitWidth(cellSize);
     }
 
-    private void placeStraightPipe(BaseBlock [][] map, int i, int j) {
-        StraightPipes straightPipe = new StraightPipes("StraightPipe.png");
+    private void placeInteractiveStraightPipe(BaseBlock [][] map, int i, int j) {
+        InteractiveStraightPipe straightPipe = new InteractiveStraightPipe("StraightPipe.png");
         map[i][j] = straightPipe;
         ImageView straightPipeImageView = straightPipe.getImageView();
         anchorPane.getChildren().add(straightPipeImageView);
@@ -58,8 +58,8 @@ public class PlayLevelOne {
         straightPipeImageView.setFitWidth(cellSize);
     }
 
-    private void placeElbowBendingPipe(BaseBlock [][] map, int i, int j) {
-        ElbowBendingPipes elbowBendingPipe = new ElbowBendingPipes("ElbowBendingPipe.png");
+    private void placeInteractiveBendingPipe(BaseBlock [][] map, int i, int j) {
+        InteractiveBendingPipe elbowBendingPipe = new InteractiveBendingPipe("ElbowBendingPipe.png");
         map[i][j] = elbowBendingPipe;
         ImageView elbowBendingPipeImageView = elbowBendingPipe.getImageView();
         anchorPane.getChildren().add(elbowBendingPipeImageView);
@@ -87,17 +87,17 @@ public class PlayLevelOne {
                     int random = new Random().nextInt(10);
                     if (random<8) {map[i][j] = new EmptyBlock();}
                     else if (random == 9) {
-                        placeStraightPipe(map, i, j);
+                        placeInteractiveStraightPipe(map, i, j);
                     }
                     else {
-                        placeElbowBendingPipe(map, i, j);
+                        placeInteractiveBendingPipe(map, i, j);
                     }
                 }
                 else if (solution[i][j] == 1 || solution[i][j] == 2){
-                    placeStraightPipe(map, i, j);
+                    placeInteractiveStraightPipe(map, i, j);
                 }
                 else if(solution[i][j] == 3 || solution[i][j]==4 || solution[i][j]==5 || solution[i][j]==6) {
-                    placeElbowBendingPipe(map, i, j);
+                    placeInteractiveBendingPipe(map, i, j);
                 }
                 else if(solution[i][j] == 7) {
                     placeInputPipe(map, i, j);

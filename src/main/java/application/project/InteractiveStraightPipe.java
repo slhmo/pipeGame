@@ -3,8 +3,8 @@ package application.project;
 import java.util.Random;
 
 
-public class StraightPipes extends MovingPipes{
-    public StraightPipes(String path) {
+public class InteractiveStraightPipe extends InteractivePipe {
+    public InteractiveStraightPipe(String path) {
         super(path);
     }
 
