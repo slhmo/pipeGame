@@ -59,7 +59,7 @@ public class MainPlay extends Application {
             anchorPane.getChildren().add(cloud);
             stage.setFullScreen(true);
             stage.setFullScreenExitHint("press esc to exit fullscreen");
-            Scene scene = new Scene(anchorPane, 800, 600);
+            Scene scene = new Scene(anchorPane, 1920, 1080);
             stage.setScene(scene);
             stage.show();
 
@@ -191,3 +191,8 @@ public class MainPlay extends Application {
 }
 
 // {{7, 0, 0, 0, 0, 0, 0}, {9, 0, 0, 0, 0, 0, 0}, {10, 0, 0, 0, 0, 0, 0}, {3, 2, 2, 2, 5, 0, 0}, {0, 4, 2, 2, 6, 0, 0}, {0, 11, 0, 0, 0, 0, 0}, {0, 13, 2, 2, 2, 2, 8}}
+
+// 10*10:
+// {{7, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {11, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {10, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {11, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+// {9, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {10, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {3, 2, 10, 2, 2, 2, 2, 9, 10, 8}}
+

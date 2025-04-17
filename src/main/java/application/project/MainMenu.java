@@ -20,7 +20,7 @@ public class MainMenu {
     private void createLevelOneButton() {
         Label levelOneLabel = new Label("level 1");
         levelOneLabel.setLayoutX(960);
-        levelOneLabel.setLayoutY(400);
+        levelOneLabel.setLayoutY(300);
         levelOneLabel.setStyle("-fx-background-color: blue; -fx-font-size: 24px; -fx-text-fill: red;");
         levelOneLabel.setOnMouseClicked(event -> {
             state = 1;
@@ -31,7 +31,7 @@ public class MainMenu {
     private void createLevelTwoButton() {
         Label levelTwoLabel = new Label("level 2");
         levelTwoLabel.setLayoutX(960);
-        levelTwoLabel.setLayoutY(600);
+        levelTwoLabel.setLayoutY(500);
         levelTwoLabel.setStyle("-fx-background-color: blue; -fx-font-size: 24px; -fx-text-fill: red;");
         levelTwoLabel.setOnMouseClicked(event -> {
             state = 2;
@@ -42,7 +42,7 @@ public class MainMenu {
     private void createLevelThreeButton() {
         Label levelThreeLabel = new Label("level 3");
         levelThreeLabel.setLayoutX(960);
-        levelThreeLabel.setLayoutY(800);
+        levelThreeLabel.setLayoutY(700);
         levelThreeLabel.setStyle("-fx-background-color: blue; -fx-font-size: 24px; -fx-text-fill: red;");
         levelThreeLabel.setOnMouseClicked(event -> {
             state = 3;
@@ -52,7 +52,7 @@ public class MainMenu {
     private void createLevelCustomButton() {
         Label levelCustomLabel = new Label("level Custom");
         levelCustomLabel.setLayoutX(920);
-        levelCustomLabel.setLayoutY(1000);
+        levelCustomLabel.setLayoutY(900);
         levelCustomLabel.setStyle("-fx-background-color: blue; -fx-font-size: 24px; -fx-text-fill: red;");
         levelCustomLabel.setOnMouseClicked(event -> {
             state = 4;
