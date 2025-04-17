@@ -1,7 +1,6 @@
 package application.project;
 
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 
 public class PlayLevelThree extends PlayLevelTwo{
@@ -68,6 +67,23 @@ public class PlayLevelThree extends PlayLevelTwo{
 
     public void setTimerText(String text) {
         timer.setText(text);
+    }
+
+    @Override
+    public void validateMap() {
+        // todo
+        System.out.println("level3 validate");
+        validated = true;
+        for (int i=0; i<map.length; i++) {
+            for (int j = 0; j < map[0].length; j++) {
+                if (map[i][j].getState() != solution[i][j] && solution[i][j] != 0) {
+                    validated = false;
+                    break;
+                }
+            }
+        }
+        printMap();
+        System.out.println("validated: " + validated);
     }
 
 }

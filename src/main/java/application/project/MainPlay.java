@@ -17,7 +17,7 @@ public class MainPlay extends Application {
     AnchorPane anchorPane;
     Stage stage;
     int state = 0;
-    /// state 0: main menu      state 1: level 1      state 2: level 2      state 3: level 3
+    /// state 0: main menu      state 1: level 1      state 2: level 2      state 3: level 3      state 4/5: level custom
 
     MainMenu mainMenu;
 
@@ -32,6 +32,8 @@ public class MainPlay extends Application {
     PlayLevelThree playLevelThree;
     int[][] solutionLevelThree;
     BaseBlock[][] levelThreeMap;
+
+    CustomLevel playLevelCustom;
 
 
     int counter;
@@ -99,6 +101,19 @@ public class MainPlay extends Application {
             this.playLevelThree = new PlayLevelThree(anchorPane, solutionLevelThree, 15);
             this.levelThreeMap = playLevelThree.getMap();
         }
+
+        if (state == 4) {
+            /// create level custom game
+            this.playLevelCustom = new CustomLevel(anchorPane);
+        }
+
+        if (state == 5) {
+            /// create level custom game
+            int [][] solutionLevelCustom = playLevelCustom.getSolution();
+            this.playLevelThree = new PlayLevelThree(anchorPane, solutionLevelCustom, playLevelCustom.getMaxMoves());
+            this.levelThreeMap = playLevelThree.getMap();
+            state = 3;
+        }
     }
 
     private void run() {
@@ -141,7 +156,7 @@ public class MainPlay extends Application {
         }
 
         if (state == 3) {
-            // play level two
+            // play level three
             counter++;
             playLevelThree.setTimerText(String.format("time: %.2f", 30-counter*0.2));
             if (MovingPipes.getNumberOfClicks() > playLevelThree.maxMoves || 30-counter*0.2 < 0) {
@@ -160,9 +175,19 @@ public class MainPlay extends Application {
             }
         }
 
+        if (state == 4) {
+            if (playLevelCustom.isSaved()) {
+                System.out.println("saved");
+                state = 5;
+                start(stage);
+            }
+        }
+
     }
 
     public static void main(String[] args) {
         launch(args);
     }
 }
+
+// {{7, 0, 0, 0, 0, 0, 0}, {9, 0, 0, 0, 0, 0, 0}, {10, 0, 0, 0, 0, 0, 0}, {3, 2, 2, 2, 5, 0, 0}, {0, 4, 2, 2, 6, 0, 0}, {0, 11, 0, 0, 0, 0, 0}, {0, 13, 2, 2, 2, 2, 8}}

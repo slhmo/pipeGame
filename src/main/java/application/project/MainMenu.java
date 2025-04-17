@@ -13,6 +13,7 @@ public class MainMenu {
         createLevelOneButton();
         createLevelTwoButton();
         createLevelThreeButton();
+        createLevelCustomButton();
         generateGameResult();
         System.out.println(gameResultText);
     }
@@ -47,6 +48,16 @@ public class MainMenu {
             state = 3;
         });
         anchorPane.getChildren().add(levelThreeLabel);
+    }
+    private void createLevelCustomButton() {
+        Label levelCustomLabel = new Label("level Custom");
+        levelCustomLabel.setLayoutX(920);
+        levelCustomLabel.setLayoutY(1000);
+        levelCustomLabel.setStyle("-fx-background-color: blue; -fx-font-size: 24px; -fx-text-fill: red;");
+        levelCustomLabel.setOnMouseClicked(event -> {
+            state = 4;
+        });
+        anchorPane.getChildren().add(levelCustomLabel);
     }
 
     public int getState() {
